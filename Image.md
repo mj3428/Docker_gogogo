@@ -14,3 +14,6 @@
 2. 载入镜像
   可以使用docker [image] load 将导出的tar文件再导人到本地镜像库。支持 －Linput string选项，从指定文件中读人镜像内容。  
 ## 上传镜像
+可以使用 docker [image] push 命令上
+传镜像到仓库，默认上传到DockerHub官方仓库(需要登录)。 命令格式为docker [image] push NAME [:TAG] I 
+[REGISTRY HOST[ :REGISTRY_PORT] /]NAME [:TAG]  
