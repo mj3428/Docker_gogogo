@@ -35,14 +35,14 @@
    - -until string ： 输出某个时间之前的日志。  
   查看某容器的输出可以使用如下命令：$docker logs ce554267d7a4
 ## 停止容器
-1. 暂停容器
+1. 暂停容器  
   可以使用 docker [container] pause CONTAINER [CONTAINER...] 命令来暂停一个运行中的容器。
   例如，启动一个容器，并将其暂停：
   $docker run --name test --rm -it ubuntu bash
   $docker pause test
   $docker ps
   处于paused状态的容器，可以使用 docker [container] unpause CONTAINER[CONTAINER...] 命令来恢复到运行状态。  
-2. 终止容器
+2. 终止容器  
   可以使用 docker [container] stop 来终止一个运行中的容器。 该命令的格式为 docker [container] stop [-t I - -time [=10]][CONTA工NER...]
   该命令会首先向容器发送SIGTERM信号，等待一段超时时间后（默认为 10 秒），再发送SIGKILL信号来终止容器：$docker stop ce5  
   此时，执行 docker container prune 命令，会自动清除掉所有处于停止状态的容器。  
