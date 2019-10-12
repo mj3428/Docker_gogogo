@@ -43,7 +43,7 @@
   $docker ps
   处于paused状态的容器，可以使用 docker [container] unpause CONTAINER[CONTAINER...] 命令来恢复到运行状态。  
 2. 终止容器  
-  可以使用 docker [container] stop 来终止一个运行中的容器。 该命令的格式为 docker [container] stop [-t I - -time [=10]][CONTA工NER...]
+  可以使用 docker [container] stop 来终止一个运行中的容器。 该命令的格式为 docker [container] stop [-t | --time [=10]][CONTA工NER...]
   该命令会首先向容器发送SIGTERM信号，等待一段超时时间后（默认为 10 秒），再发送SIGKILL信号来终止容器：$docker stop ce5  
   此时，执行 docker container prune 命令，会自动清除掉所有处于停止状态的容器。  
   此外，还可以通过 docker [container] kill 直接发送 SIGKILL 信号来强行终止容器。  
