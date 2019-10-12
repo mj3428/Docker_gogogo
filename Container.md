@@ -24,3 +24,26 @@
 4. 守护态运行  
   需要让 Docker 容器在后台以守护态（Daemonized）形式运行。此时，可以通过添加 -d 参数来实现。例如，下面的命令会在后台运行容
   器：$docker run -d ubuntu/bin/sh -c "while true; do echo hello world; sleep l; done"
+5. 查看容器输出
+  要获取容器的输出信息，可以通过 docker [container] logs命令  
+  该命令支持的选项包括：
+   - -details ： 打印详细信息；
+   - -f, - follow ：持续保持输出；
+   - -since string ：输出从某个时间开始的日志；
+   - -tail string ： 输出最近的若干日志；
+   - -t, - timestamps ： 显示时间戳信息 ；
+   - -until string ： 输出某个时间之前的日志。  
+  查看某容器的输出可以使用如下命令：$docker logs ce554267d7a4
+## 停止容器
+1. 暂停容器
+  可以使用 docker [container] pause CONTAINER [CONTAINER...] 命令来暂停一个运行中的容器。
+  例如，启动一个容器，并将其暂停：
+  $docker run --name test --rm -it ubuntu bash
+  $docker pause test
+  $docker ps
+  处于paused状态的容器，可以使用 docker [container] unpause CONTAINER[CONTAINER...] 命令来恢复到运行状态。  
+2. 终止容器
+  可以使用 docker [container] stop 来终止一个运行中的容器。 该命令的格式为 docker [container] stop [-t I - -time [=10]][CONTA工NER...]
+  该命令会首先向容器发送SIGTERM信号，等待一段超时时间后（默认为 10 秒），再发送SIGKILL信号来终止容器：$docker stop ce5  
+  此时，执行 docker container prune 命令，会自动清除掉所有处于停止状态的容器。  
+  此外，还可以通过 docker [container] kill 直接发送 SIGKILL 信号来强行终止容器。  
