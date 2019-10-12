@@ -20,6 +20,7 @@
     - 从网桥的地址池配置一个 IP 地址给容器；
     - 执行用户指定的应用程序；
     - 口执行完毕后容器被自动终止 。
-  可以使用 docker container wait CONTAINER [CONTAINER . .. ］子命令来等待容器退出，并打印退出返回结果。
-4. 守护态运行
-  
+  可以使用 docker container wait CONTAINER [CONTAINER ...]子命令来等待容器退出，并打印退出返回结果。  
+4. 守护态运行  
+  需要让 Docker 容器在后台以守护态（Daemonized）形式运行。此时，可以通过添加 -d 参数来实现。例如，下面的命令会在后台运行容
+  器：$docker run -d ubuntu/bin/sh -c "while true; do echo hello world; sleep l; done"
