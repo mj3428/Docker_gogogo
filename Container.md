@@ -56,5 +56,6 @@
    - --no-stdin=true|false: 是否关闭标准输入，默认是保持打开;  
    - --sig-proxy=true|false: 是否代理收到的系统信号给应用进程，默认为 true;  
 2. exec命令  
+   docker [container] exec [-d|--detach] [--detach-keys[=[]]] [-i|--interactive][--piivileged] [-t|-tty] 
+   [-u|--user [=USER]] CONTAINER COMMAND [ARG...]   
    
-
