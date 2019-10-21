@@ -58,4 +58,10 @@
 2. exec命令  
    docker [container] exec [-d|--detach] [--detach-keys[=[]]] [-i|--interactive][--piivileged] [-t|-tty] 
    [-u|--user [=USER]] CONTAINER COMMAND [ARG...]   
-   
+   - -d, --detach： 在容器中后台执行命令；
+   - --detach-keys＝""：指定将容器切回后台的按键；
+   - -e, --env=[]：指定环境变量列表；
+   - -i, --interactive=true|false：打开标准输入接受用户输入命令,默认值为false;
+   - -privileged=trueifalse:是否给执行命令以高权限，默认值为 false;
+   - -t, --tty=trueifalse:分配伪终端，默认值为 false;
+   - -u, --user＝＂＂：执行命令的用户名或 ID.
