@@ -47,3 +47,14 @@
   该命令会首先向容器发送SIGTERM信号，等待一段超时时间后（默认为 10 秒），再发送SIGKILL信号来终止容器：$docker stop ce5  
   此时，执行 docker container prune 命令，会自动清除掉所有处于停止状态的容器。  
   此外，还可以通过 docker [container] kill 直接发送 SIGKILL 信号来强行终止容器。  
+## 进入容器
+在使用-d参数时，容器启动后会进入后台，用户无法看到容器中的信息，也无法进行操作。至于，操作官方推荐attach或者exec  
+1. attach命令  
+   `docker [container] attach [--detach-keys[=[]]] [--no-stdin] [--sig-proxy[=true]] CONTAINER`  
+   三个options:
+   - --detach-keys [=[]]: 指定退出 attach 模式的快捷键序列， 默认是CTRL+p,CTRL+q;
+   - --no-stdin=true|false: 是否关闭标准输入，默认是保持打开;  
+   - --sig-proxy=true|false: 是否代理收到的系统信号给应用进程，默认为 true;  
+2. exec命令  
+   
+
