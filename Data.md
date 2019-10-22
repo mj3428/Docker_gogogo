@@ -6,6 +6,7 @@
 - 对数据卷内数据的修改会立马生效，无论是容器内操作还是本地操作；  
 - 对数据卷的更新不会影响镜像，解摘开应用和数据 ；  
 - 卷会一直存在 ，直到没有容器使用，可以安全地卸载它.  
+
 1. 创建数据卷  
 Docker提供了volume 子命令来管理数据卷，如下命令可以快速在本地创建一个数据卷：`docker volume create -d local test`
 2. 绑定数据卷
@@ -15,6 +16,7 @@ Docker提供了volume 子命令来管理数据卷，如下命令可以快速在�
 - volume:普通数据卷，映射到主机/var/lib/docker/volumes路径下；
 - bind:绑定数据卷，映射到主机指定路径下；  
 - tmpfs:临时数据卷，只存在于内存中；  
+
 下面使用 training/webapp 镜像创建一个Web容器，并创建一个数据卷挂载到容器的/opt/webapp 目录：  
 `docker run -d -P --name web --mount type=bind,source=/webapp,destination=/opt/webapp training/webapp python app.py`  
 上述命令等同于使用旧的 -v标记可以在容器内创建一个数据卷：  
