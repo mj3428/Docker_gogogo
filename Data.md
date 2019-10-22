@@ -35,3 +35,20 @@ $docker run -it --volumes-from dbdata -name dbl ubuntu
 $docker run -it --volumes-from dbdata -name db2 ubuntu
 ```
 此时，容器dbl和db2都挂载同一个数据卷到相同的/dbdata 目录，三个容器任何一方在该目录下的写入，其他容器都可以看到。  
+可以多次使用--volumes-from参数来从多个容器挂载多个数据卷，还可以从其他已经挂载了容器卷的容器来挂载数据卷：
+`docker run -d --name db3 --volumes-from dbl training/postgres`使用--volumes-from参数所挂载数据卷的容器自身并不需要保持在运行状态。  
+如果删除了挂载的容器（包括 dbdata、db1和db2），数据卷并不会被自动删除。 如果要删除一个数据卷，必须在删除最后一个还
+挂载着它的容器时显式使用 docker rm -v 命令来指定同时删除关联的容器。
+## 利用数据卷来迁移数据
+1. 备份  
+   使用下面的命令来备份 dbdata 数据卷容器内的数据卷:
+   `docker run -volumes-from dbdata -v $ (pwd) : /backup --name worker ubuntu tar cvf /backup/backup.tar /dbdata`  
+   先利用 ubuntu 镜像创建了一个容器 worker。 使用--volumes-from dbdata 参数来让worker容器挂载dbdata容器的数据卷（即dbdata数据卷）；
+   使用-v $(pwd):/backup参数来挂载本地的当前目录到 worker 容器的/backup 目录。
+   worker容器启动后，使用 tar cvf /backup/backup.tar /dbdata 命令将/dbdata下内容备份为容器内
+   的/backup/backup.tar,即宿主主机当前目录下的backup.tar
+2. 恢复  
+   如果要恢复数据到一个容器，可以按照下面的操作。首先创建一个带有数据卷的容器 dbdata2:
+   `docker run -v /dbdata --name dbdata2 ubuntu /bin/bash`
+   然后创建另一个新的容器，挂载 dbdata2 的容器，并使用 untar 解压备份文件到所挂载的容器卷中：
+   `docker run --volumes-from dbdata2 -v $(pwd) :/backup busybox tar xvf /backup/backup.tar`
